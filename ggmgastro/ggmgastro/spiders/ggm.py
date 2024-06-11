@@ -1,10 +1,11 @@
 import scrapy
 import random
 
+
 class GgmSpider(scrapy.Spider):
     name = "ggm"
     allowed_domains = ["www.ggmgastro.com"]
-    start_urls = ["https://www.ggmgastro.com"]
+    start_urls = ["https://www.ggmgastro.com/de-de-eur"]
 
     USER_AGENTS = [
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
@@ -19,9 +20,9 @@ class GgmSpider(scrapy.Spider):
         'Opera/9.80 (Android; Opera Mini/51.0.2254/190.255; U; en) Presto/2.12.423 Version/12.16'
     ]
 
-
     def parse(self, response):
-        #all_category = response.xpath("//ul[@class='row wrap m0 p0 relative']/li[@class='main-menu__item col-xs/div[@class='subcategory-item']/a ::attr(href)")
+        # all_category = response.xpath("//ul[@class='row wrap m0 p0 relative']/li[@class='main-menu__item
+        # col-xs/div[@class='subcategory-item']/a ::attr(href)")
 
         # get all css-tags with the followling class
         all_category = response.css('subcategory-item')
@@ -30,14 +31,12 @@ class GgmSpider(scrapy.Spider):
         for category in all_category:
             relative_url = category.css('a ::attr(href)').get()
             # Follow the individual Links and get data with the self.parse_subcategory method.
-            yield response.follow(relative_url, callback=self.parse_subcategory, headers={"User-Agent": self.USER_AGENTS[random.randint(0, len(self.USER_AGENTS)-1)]})
+            yield response.follow(relative_url, callback=self.parse_subcategory, headers={
+                "User-Agent": self.USER_AGENTS[random.randint(0, len(self.USER_AGENTS) - 1)]})
 
     def parse_subcategory(self, response):
-
         yield {
             'url': response.url,
-            'sub_category': response.xpath("//ul[@class='breadcrumb']/li[@class='active']/preceding-sibling::li[1]/a/text()").get()
+            'sub_category': response.xpath(
+                "//ul[@class='breadcrumb']/li[@class='active']/preceding-sibling::li[1]/a/text()").get()
         }
-
-
-

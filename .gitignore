@@ -4,3 +4,4 @@ venv/
 .idea/*.xml
 .idea/*.iml
 books.json
+ggm_category.json
