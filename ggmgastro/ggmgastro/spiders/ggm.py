@@ -1,7 +1,7 @@
 import scrapy
 import random
 
-
+# Ich glaube die Webseite laedt den Inhalt dynamisch, deswegen keinen Output. Versuch: mit selenium und scrapy.
 class GgmSpider(scrapy.Spider):
     name = "ggm"
     allowed_domains = ["www.ggmgastro.com"]
@@ -25,7 +25,7 @@ class GgmSpider(scrapy.Spider):
         # col-xs/div[@class='subcategory-item']/a ::attr(href)")
 
         # get all css-tags with the followling class
-        all_category = response.css('subcategory-item')
+        all_category = response.css('div.subcategory-item')
 
         # Run through all css tags and get the links of the individual css tags
         for category in all_category:
