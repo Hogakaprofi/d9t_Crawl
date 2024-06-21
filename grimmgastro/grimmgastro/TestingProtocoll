@@ -7,26 +7,19 @@ Wichtig, die software muss einzeln getestet werden ueber den d9t-Server.
 Probiere die einzelnen response.css & response.xpath mithilfe von der scrapy shell
 ueber den d9t-Server.
 
-Seiten die schwierig sind:
-
--ggmgastro
-
-
-Seiten zum Testen:
-
-- grimmgastro
--
-
-
-
-
 Was muss getestet werden?:
 
+- Die Methoden einzeln. (Als erstes die 1. Methode, dann die 1. mit der 2. zusammen usw. )
 -
+
+
 
 
 
 
 Was wurde schon getestet?:
 
--
+- Methode: def parse(...) : Funktioniert
+- Methoden: defparse & def parse_second_category_page(...) : Funktioniert
+- Methoden: defparse & def parse_second_category_page & def parse_third.. : Funktioniert
+- Methoden: complete project :

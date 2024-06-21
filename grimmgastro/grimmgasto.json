@@ -1,0 +1,15 @@
+[
+{"First_Title": "Kühlen", "Second_Title": "Kühlschränke", "Third_Title": "Minibar Kühlschränke", "Filter_namen": ["Marke", "Preis", "Maße", "Türart", "Innenmaterial"]},
+{"First_Title": "Kühlen", "Second_Title": "Kühlschränke", "Third_Title": "Einfahrkühlschränke", "Filter_namen": ["Marke", "Preis", "Maße", "Türart", "Inhalt", "Außenmaterial", "Innenmaterial"]},
+{"First_Title": "Kühlen", "Second_Title": "Laborkühlgeräte", "Third_Title": "Labortiefkühltruhen", "Filter_namen": ["Marke", "Preis", "Maße", "min. Temperatur"]},
+{"First_Title": "Kühlen", "Second_Title": "Laborkühlgeräte", "Third_Title": "Laborgefrierschränke", "Filter_namen": ["Marke", "Preis", "Maße", "Inhalt", "Kühlung", "Explosionsschutz", "Alarmfunktion", "max. Umgebungstemperatur"]},
+{"First_Title": "Kühlen", "Second_Title": "Laborkühlgeräte", "Third_Title": "Labor- & Medikamentenkühlschränke", "Filter_namen": ["Preis", "Maße", "Inhalt", "Kühlung", "Explosionsschutz", "max. Umgebungstemperatur"]},
+{"First_Title": "Kühlen", "Second_Title": "Kühltheken", "Third_Title": "Kühlinseln", "Filter_namen": ["Marke", "Preis", "Maße", "Temperaturbereich"]},
+{"First_Title": "Kühlen", "Second_Title": "Kühl- & Tiefkühlzellen", "Third_Title": "Fasskühler", "Filter_namen": ["Marke", "Preis", "Maße", "Aufnahmekapazität"]},
+{"First_Title": "Kühlen", "Second_Title": "Kühlvitrinen", "Third_Title": "Mehrzweckkühlvitrinen", "Filter_namen": ["Preis", "Maße", "Ausführung", "Glasform"]},
+{"First_Title": "Edelstahlmöbel", "Second_Title": "Küchenborde", "Third_Title": "Wandborde", "Filter_namen": ["Marke", "Preis", "Maße"]},
+{"First_Title": "Küchenzubehör", "Second_Title": "Hygiene & Ordnung", "Third_Title": "Absperrelemente", "Filter_namen": ["Marke", "Preis", "Maße"]},
+{"First_Title": "Gastraum", "Second_Title": "Einrichtungen", "Third_Title": "Aschenbecher", "Filter_namen": ["Marke", "Preis", "Maße"]},
+{"First_Title": "Gastraum", "Second_Title": "Einrichtungen", "Third_Title": "Heizstrahler", "Filter_namen": ["Marke", "Preis", "Maße"]},
+{"First_Title": "Gastraum", "Second_Title": "Einrichtungen", "Third_Title": "Aufsteller & Werbetafeln", "Filter_namen": ["Marke", "Preis", "Maße", "Ausführung"]},
+{"First_Title": "Gastraum", "Second_Title": "Einrichtungen", "Third_Title": "Bänke & Tische", "Filter_namen": ["Preis", "Maße", "Ausführung"]}
