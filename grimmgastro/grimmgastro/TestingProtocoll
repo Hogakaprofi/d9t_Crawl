@@ -7,6 +7,16 @@ Wichtig, die software muss einzeln getestet werden ueber den d9t-Server.
 Probiere die einzelnen response.css & response.xpath mithilfe von der scrapy shell
 ueber den d9t-Server.
 
+Seiten die schwierig sind:
+
+-ggmgastro
+
+
+Seiten zum Testen:
+
+- grimmgastro
+-
+
 
 
 

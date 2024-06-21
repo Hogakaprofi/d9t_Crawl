@@ -29,6 +29,7 @@ class GrimmSpider(scrapy.Spider):
                 yield response.follow(relative_url, callback=self.parse_second_category_page)
                 # headers={"User-Agent": self.USER_AGENT_LIST[random.randint(0, len(self.USER_AGENT_LIST)-1)]}
 
+
     # Scrape the individual categories (2. Ebene)
     def parse_second_category_page(self, response):
         print(f'Main_Category: {response.url}')
@@ -59,14 +60,17 @@ class GrimmSpider(scrapy.Spider):
 
     # Scrape the individual Links for the products (4. Ebene)
     def parse_fourth_category_page(self, response):
+        print(f'Third_Category: {response.url}')
+        products = response.css('div.card-body')
 
-        # Get all filter divs
-        all_filter = response.css('div.filter-panel-item')
-        Title_list = []
+        for product_data in products:
+            product_url = product_data.css('div[3] a ::attr(href)').get()
+            if product_url not in self.seen_urls:
+                self.seen_urls.add(product_url)
+                yield response.follow(product_url, callback=self.parse_fifth_category_page)
 
-        for filter in all_filter:
-            Title_list.append(response.css('button.filter-panel-item-toggle::text').get().strip())
-
+    # Scrape the individual Product Data of the individual products
+    def parse_fifth_category_page(self, response):
         yield {
             'First_url': self.start_urls,
             'First_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[1]/a/span/text()").get(),
@@ -74,5 +78,15 @@ class GrimmSpider(scrapy.Spider):
             'Second_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
             'Third_url': self.secondLink,
             'Third_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[3]/a/span/text()").get(),
-            'Filter_namen': Title_list,
+            'title': response.css('.product-detail-name-container h1::text').get(),
+            'price': response.css('p.product-detail-price ::text').get(),
         }
+
+    # For the Filter
+    def parse_filter(self, response):
+        print("Filter")
+
+
+    # For the Sales Page
+    def parse_sales(self, response):
+        print("Sales webpage")
