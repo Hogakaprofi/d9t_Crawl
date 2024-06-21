@@ -64,8 +64,8 @@ class GrimmSpider(scrapy.Spider):
         all_filter = response.css('div.filter-panel-item')
         Title_list = []
 
-        for filter in all_filter:
-            Title_list.append(response.css('button.filter-panel-item-toggle::text').get().strip())
+        for filtered in all_filter:
+            Title_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip())
 
         yield {
             'First_url': self.start_urls,
