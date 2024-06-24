@@ -61,7 +61,7 @@ class GrimmSpider(scrapy.Spider):
 
             'First_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[1]/a/span/text()").get(),
             'Second_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
-            'Third_Url': response.url,
             'Third_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[3]/a/span/text()").get(),
             'Filter_namen': Title_list,
+            'Third_Url': response.url,
         }

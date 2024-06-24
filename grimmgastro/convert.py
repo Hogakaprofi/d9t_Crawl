@@ -11,7 +11,7 @@ df = pd.read_json(json_file)
 # df.to_csv(csv_file, index=False, encoding='utf-8')
 
 # Speichern als Excel-Datei mit UTF-8 Encoding
-excel_file = 'ausgabe.xlsx'
+excel_file = 'grimmgasto.xlsx'
 df.to_excel(excel_file, index=False, engine='openpyxl')  # Hier 'openpyxl' oder 'xlsxwriter' verwenden
 
-print(f'Daten erfolgreich als CSV und Excel (UTF-8) gespeichert.')
+print(f'Daten erfolgreich als Excel (UTF-8) gespeichert.')
