@@ -1,11 +1,6 @@
 [
-
-][
-
-][
-
-][
-
-][
-
-]
+{"Kategorie": null, "Unter-Kategorie": null, "Filter_namen": ["Lieferzeit", "Marken", "Breite", "Höhe", "Preis", "Material", "Länge", "Spülmaschineneignung"], "Third_Url": "https://www.schafferer.de/gastro/Buffet/Serviertablett/"},
+{"Kategorie": null, "Unter-Kategorie": null, "Filter_namen": ["Lieferzeit", "Marken", "Durchmesser", "Höhe", "Preis"], "Third_Url": "https://www.schafferer.de/gastro/Buffet/Servierschalen-Etageren/"},
+{"Kategorie": null, "Unter-Kategorie": null, "Filter_namen": ["Lieferzeit", "Marken", "Durchmesser", "Höhe", "Preis"], "Third_Url": "https://www.schafferer.de/gastro/Buffet/Saftspender/"},
+{"Kategorie": null, "Unter-Kategorie": null, "Filter_namen": ["Lieferzeit", "Marken", "Breite", "Höhe", "Preis"], "Third_Url": "https://www.schafferer.de/gastro/Buffet/Rechaud/"},
+{"Kategorie": null, "Unter-Kategorie": null, "Filter_namen": ["Lieferzeit", "Marken", "Durchmesser", "Breite", "Höhe", "Preis", "Tiefe", "Material", "Länge"], "Third_Url": "https://www.schafferer.de/gastro/Buffet/Presenter/"}
