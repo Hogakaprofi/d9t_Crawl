@@ -13,10 +13,10 @@ class SchaffSpider(scrapy.Spider):
 
     # Scrape the Main-Page (Startseite)
     def parse(self, response):
-        # Get all main categorys of main-page
+        # scrape the ul element in which the categories are located
         main_categories = response.xpath('//*[@id="header"]/div[2]/div[2]/div/nav/ul/li[1]/ul')
 
-        # Verwende XPath innerhalb des ausgewählten `ul`-Elements, um das `a`-Tag direkt nach dem `li`-Tag zu scrapen
+        # get all links of the first a tag in the li element
         categories = main_categories.xpath('./li/a[1]/@href').extract()
 
         for category in categories:
@@ -26,6 +26,7 @@ class SchaffSpider(scrapy.Spider):
             if category_url not in self.ignore_urls:
                 yield response.follow(category_url, callback=self.parse_subcategories)
 
+    # Scrape subcategories
     def parse_subcategories(self, response):
         sub_categories = response.css('div.manufacturer-series div.col-md-4')
 
@@ -35,11 +36,8 @@ class SchaffSpider(scrapy.Spider):
             category_url = response.urljoin(sub_category.strip())
             yield response.follow(category_url, callback=self.parse_if_subcategories)
 
+    # check whether the following link is a filter page or a category page
     def parse_if_subcategories(self, response):
-
-        # Schauen ob ein besimmtes html tag oder css usw. gibt und dann entscheiden
-        # Wen das tag oder was auch immer da ist, dann mache das gleiche wie parse_subcategories
-        # Andernfalls geb den link weiter an parse_get_data!
 
         filterbox = response.css('div.filterBox')
 
@@ -55,18 +53,37 @@ class SchaffSpider(scrapy.Spider):
                 category_url = response.urljoin(sub_category.strip())
                 yield response.follow(category_url, callback=self.parse_if_subcategories)
 
+    # scrape the categories and the filter from filter page
     def parse_get_data(self, response):
 
-        # Get all filter
-        all_filter = response.css('div.filterItemHeader')
+        # define lists
         Title_list = []
+        Category_list = []
 
+        # Get all filter and Categories
+        all_filter = response.css('div.filterItemHeader')
+        all_categories = response.css('ol.breadcrumb li')
+
+        # Filter
         for filtered in all_filter:
             Title_list.append(filtered.css('span::text').get().strip())
 
+        # Categories
+        for idx, li in enumerate(all_categories):
+            if idx == len(all_categories) - 1:  # Letztes <li> Element
+                # Extrahiere den Text des <span> Tags
+                span_text = li.xpath('.//span/text()').get()
+                if span_text:
+                    Category_list.append(span_text.strip())
+            else:  # Alle anderen <li> Elemente
+                # Extrahiere den Text des <a> Tags
+                a_text = li.xpath('.//a/text()').get()
+                if a_text:
+                    Category_list.append(a_text.strip())
+
+        # Output
         yield {
-            'Kategorie': response.xpath("/html/body/div[2]/div[1]/div/div/div/div[1]/ol/li[2]/a/text()").get(),
-            'Unter-Kategorie': response.xpath("/html/body/div[2]/div[1]/div/div/div/div[1]/ol/li[3]/span/text()").get(),
+            'Kategorie': Category_list,
             'Filter_namen': Title_list,
             'Third_Url': response.url,
         }
