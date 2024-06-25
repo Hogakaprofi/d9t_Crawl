@@ -1,5 +1,6 @@
 import scrapy
 
+
 class SchaffSpider(scrapy.Spider):
     name = "schaff"
     allowed_domains = ["www.schafferer.de"]
@@ -32,29 +33,33 @@ class SchaffSpider(scrapy.Spider):
 
         for sub_category in relative_urls:
             category_url = response.urljoin(sub_category.strip())
-            #if no more category then go to jump to parse_get_data
-                # yield response.follow(category_url, callback=self.parse_get_data)
-            yield response.follow(category_url, callback=self.parse_get_data)
-            #else
-                # yield response.follow(category_url, callback=self.parse_sec_subcategories)
+            yield response.follow(category_url, callback=self.parse_if_subcategories)
 
+    def parse_if_subcategories(self, response):
 
-    # For the second subcategory
-    # def parse_sec_subcategories(self, response):
-    #     sub_categories = response.css('div.manufacturer-series div.col-md-4')
-    #
-    #     relative_urls = sub_categories.xpath('./a[1]/@href').extract()
-    #
-    #     for sub_category in relative_urls:
-    #         category_url = response.urljoin(sub_category.strip())
-    #         yield response.follow(category_url, callback=self.parse_get_data)
+        # Schauen ob ein besimmtes html tag oder css usw. gibt und dann entscheiden
+        # Wen das tag oder was auch immer da ist, dann mache das gleiche wie parse_subcategories
+        # Andernfalls geb den link weiter an parse_get_data!
+
+        filterbox = response.css('div.filterBox')
+
+        if filterbox:
+            yield response.follow(response.url, callback=self.parse_get_data)
+
+        else:
+            subsub_categories = response.css('div.manufacturer-series div.col-md-4')
+
+            relative_urls = subsub_categories.xpath('./a[1]/@href').extract()
+
+            for sub_category in relative_urls:
+                category_url = response.urljoin(sub_category.strip())
+                yield response.follow(category_url, callback=self.parse_if_subcategories)
 
     def parse_get_data(self, response):
 
         # Get all filter
         all_filter = response.css('div.filterItemHeader')
         Title_list = []
-
 
         for filtered in all_filter:
             Title_list.append(filtered.css('span::text').get().strip())
