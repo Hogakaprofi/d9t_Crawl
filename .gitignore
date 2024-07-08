@@ -3,7 +3,7 @@ venv/
 
 .idea/*.xml
 .idea/*.iml
-.json
+*.json
 ggm_category.json
 .csv
 # Ignore Excel files in Excel_Output directory
