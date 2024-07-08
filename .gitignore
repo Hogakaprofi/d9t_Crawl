@@ -1,13 +1,18 @@
+# Ignoriere Verzeichnisse
 venv/
 .idea/
 
-.idea/*.xml
-.idea/*.iml
+# Ignoriere bestimmte Dateitypen
 *.json
-ggm_category.json
-.csv
-# Ignore Excel files in Excel_Output directory
-Excel_Output/*.xlsx
+*.csv
 *.xlsx
 
+# Ignoriere spezifische Dateien
+ggm_category.json
 
+# Ignoriere JetBrains IDE Dateien
+.idea/*.xml
+.idea/*.iml
+
+# Ignoriere Excel-Dateien im Excel_Output Verzeichnis
+Excel_Output/*.xlsx
