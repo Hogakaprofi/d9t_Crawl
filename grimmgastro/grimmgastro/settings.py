@@ -13,7 +13,7 @@ SPIDER_MODULES = ["grimmgastro.spiders"]
 NEWSPIDER_MODULE = "grimmgastro.spiders"
 
 FEEDS = {
-    'grimmgasto.json': {'format': 'json'},
+    'grimmgastro.json': {'format': 'json'},
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

@@ -43,15 +43,12 @@ class SchaffSpider(scrapy.Spider):
 
         if filterbox:
             yield response.follow(response.url, callback=self.parse_get_data)
-
         else:
             subsub_categories = response.css('div.manufacturer-series div.col-md-4')
-
             relative_urls = subsub_categories.xpath('./a[1]/@href').extract()
-
             for sub_category in relative_urls:
                 category_url = response.urljoin(sub_category.strip())
-                yield response.follow(category_url, callback=self.parse_if_subcategories)
+                yield response.follow(category_url, callback=self.parse_get_data)
 
     # scrape the categories and the filter from filter page
     def parse_get_data(self, response):

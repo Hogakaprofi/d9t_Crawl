@@ -58,7 +58,6 @@ class GrimmSpider(scrapy.Spider):
             Title_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip())
 
         yield {
-
             'First_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[1]/a/span/text()").get(),
             'Second_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
             'Third_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[3]/a/span/text()").get(),
