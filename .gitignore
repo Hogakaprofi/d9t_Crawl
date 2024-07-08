@@ -8,5 +8,6 @@ ggm_category.json
 .csv
 # Ignore Excel files in Excel_Output directory
 Excel_Output/*.xlsx
-.xlsx
+*.xlsx
+
 
