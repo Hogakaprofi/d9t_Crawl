@@ -13,7 +13,7 @@ SPIDER_MODULES = ["toptable.spiders"]
 NEWSPIDER_MODULE = "toptable.spiders"
 
 FEEDS = {
-    'top_table.json': {'format': 'json'},
+    'toptable.json': {'format': 'json'},
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

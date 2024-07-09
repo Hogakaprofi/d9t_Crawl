@@ -4,7 +4,8 @@ import pandas as pd
 # Liste von Dateipfaden, die überprüft werden sollen
 file_paths = [
     '../grimmgastro/grimmgastro.json',
-    '../schafferer/schafferer.json'
+    '../schafferer/schafferer.json',
+    '../toptable/toptable.json'
 ]
 
 output = './'
