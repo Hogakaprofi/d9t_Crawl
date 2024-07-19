@@ -5,7 +5,8 @@ import pandas as pd
 file_paths = [
     '../grimmgastro/grimmgastro.json',
     '../schafferer/schafferer.json',
-    '../toptable/toptable.json'
+    '../toptable/toptable.json',
+    '../edgarfuchs/edgarfuchs.json'
 ]
 
 output = './'
