@@ -6,7 +6,9 @@ file_paths = [
     '../grimmgastro/grimmgastro.json',
     '../schafferer/schafferer.json',
     '../toptable/toptable.json',
-    '../edgarfuchs/edgarfuchs.json'
+    '../edgarfuchs/edgarfuchs.json',
+    '../hinschegastrowelt/hinschegastro.json',
+    '../dueGuenther/guenther.json'
 ]
 
 output = './'

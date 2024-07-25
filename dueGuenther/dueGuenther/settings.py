@@ -60,7 +60,7 @@ DOWNLOAD_DELAY_RANDOMIZE = True
 #}
 
 DOWNLOADER_MIDDLEWARES = {
-    "grimmgastro.middlewares.RotateUserAgentMiddleware": 543,
+    "dueGuenther.middlewares.RotateUserAgentMiddleware": 543,
 }
 
 USER_AGENT_LIST = [
