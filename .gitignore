@@ -6,6 +6,7 @@ venv/
 *.json
 *.csv
 *.xlsx
+*.txt
 
 # Ignoriere spezifische Dateien
 ggm_category.json
