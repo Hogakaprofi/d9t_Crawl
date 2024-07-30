@@ -47,7 +47,7 @@ class TtableSpider(scrapy.Spider):
                 selection_str += item.css('label.filter-multi-select-item-label::text').get().strip() + ", "
 
             Filter_list.append(
-                filtered.css('button.filter-panel-item-toggle::text').get().strip() + ': ' + selection_str)
+                filtered.css('button.filter-panel-item-toggle::text').get().strip() + ': ' + selection_str + ";")
 
         yield {
             'Url': response.url,
