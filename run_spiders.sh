@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # Arrays initialisieren
-paths=("/pfad/zu/ordner1" "/pfad/zu/ordner2") # Pfade, die durchgegangen werden sollen
-spiders=("spider1" "spider2") # Namen der Spider-Befehle
 
 # Anzahl der Pfade und Spider-Namen überprüfen
 num_paths=${#paths[@]}
@@ -40,4 +38,3 @@ for ((i=0; i<num_paths; i++)); do
   fi
 done
 
-echo "Alle Befehle erfolgreich ausgeführt."

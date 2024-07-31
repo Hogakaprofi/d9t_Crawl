@@ -1,6 +1,7 @@
 # Ignoriere Verzeichnisse
 venv/
 .idea/
+myenv/
 
 # Ignoriere bestimmte Dateitypen
 *.json
