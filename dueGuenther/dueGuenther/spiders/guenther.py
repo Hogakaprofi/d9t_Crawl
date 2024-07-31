@@ -8,7 +8,7 @@ class GuentherSpider(scrapy.Spider):
 
     def parse(self, response):
         # Check for filters
-        all_filter = response.css('div.product-filter-accordian')
+        all_filter = response.css('div.product-filter-accordian:first-of-type')
         # Check if filter is there (Yes: Get all data ; No: Get more Links and go to parse)
         if all_filter:
             self.logger.info('Beginne das Scrapen der Seite: %s', response.url)
@@ -20,15 +20,15 @@ class GuentherSpider(scrapy.Spider):
 
             # Get Filter
             filter_list = []
-            for filters in all_filter:
-                items = filters.css('ul.sub-category')
+            allfilter = all_filter.css('a.product-filter-down')
+            for filters in allfilter:
+                items = all_filter.css('ul.sub-category')
                 selection_str = ''
                 for item in items:
                     selection_str += item.css('span:nth-of-type(1)::text').get().strip() + ", "
 
                 filter_list.append(
-                    filters.css(
-                        'a.product-filter-down span:nth-of-type(2)::text').get().strip() + ': ' + selection_str)
+                    filters.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
 
             # Get more data
             data_list = []

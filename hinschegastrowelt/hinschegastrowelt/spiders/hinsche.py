@@ -22,14 +22,13 @@ class HinscheSpider(scrapy.Spider):
             filter_list = []
             allfilter = all_filter.css('a.product-filter-down')
             for filters in allfilter:
-                items = filters.css('ul.sub-category')
+                items = all_filter.css('ul.sub-category')
                 selection_str = ''
                 for item in items:
                     selection_str += item.css('span:nth-of-type(1)::text').get().strip() + ", "
 
                 filter_list.append(
-                    filters.css(
-                        'span:nth-of-type(2)::text').get() + ': ' + selection_str)
+                    filters.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
 
             # Get more data
             data_list = []
