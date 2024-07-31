@@ -20,17 +20,18 @@ class EdgarSpider(scrapy.Spider):
             all_categories = response.css('div.breadcrumbs li:not(:first-child)')
             for category in all_categories:
                 category_list.append(category.css('a::text').get())
+
             # Get Filter
             filter_list = []
             allfilter = all_filter.css('a.product-filter-down')
-            for filter in allfilter:
-                items = (filter.css('ul.sub-category'))
+            for filters in allfilter:
+                items = (all_filter.css('ul.sub-category'))
                 selection_str = ''
                 for item in items:
                     selection_str += item.css('span:nth-of-type(1)::text').get().strip() + ", "
 
                 filter_list.append(
-                    filter.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
+                    filters.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
 
             # Get more data
             data_list = []

@@ -11,7 +11,7 @@ file_paths = [
     '/home/user/crawl/d9t_Crawl/dueGuenther/guenther.json'
 ]
 
-output = './'
+output = '/home/user/crawl/d9t_Crawl/Excel_Output/'
 
 for file_path in file_paths:
     if os.path.exists(file_path):
