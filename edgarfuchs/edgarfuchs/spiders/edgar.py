@@ -11,7 +11,7 @@ class EdgarSpider(scrapy.Spider):
 
     def parse(self, response):
         # Check for filters
-        all_filter = response.css('div.product-filter-accordian')
+        all_filter = response.css('div.product-filter-accordian:first-of-type')
         # Check if filter is there (Yes: Get all data ; No: Get more Links and go to parse)
         if all_filter:
             self.logger.info('Beginne das Scrapen der Seite: %s', response.url)
@@ -20,7 +20,7 @@ class EdgarSpider(scrapy.Spider):
             all_categories = response.css('div.breadcrumbs li:not(:first-child)')
             for category in all_categories:
                 category_list.append(category.css('a::text').get())
-
+            print('Kategorie fertig!')
             # Get Filter
             filter_list = []
             for filters in all_filter:
