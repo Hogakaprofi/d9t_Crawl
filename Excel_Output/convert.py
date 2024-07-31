@@ -3,12 +3,12 @@ import pandas as pd
 
 # Liste von Dateipfaden, die überprüft werden sollen
 file_paths = [
-    '../grimmgastro/grimmgastro.json',
-    '../schafferer/schafferer.json',
-    '../toptable/toptable.json',
-    '../edgarfuchs/edgarfuchs.json',
-    '../hinschegastrowelt/hinschegastro.json',
-    '../dueGuenther/guenther.json'
+    '/home/user/crawl/d9t_Crawl/grimmgastro/grimmgastro.json',
+    '/home/user/crawl/d9t_Crawl/schafferer/schafferer.json',
+    '/home/user/crawl/d9t_Crawl/toptable/toptable.json',
+    '/home/user/crawl/d9t_Crawl/edgarfuchs/edgarfuchs.json',
+    '/home/user/crawl/d9t_Crawl/hinschegastrowelt/hinschegastro.json',
+    '/home/user/crawl/d9t_Crawl/dueGuenther/guenther.json'
 ]
 
 output = './'
