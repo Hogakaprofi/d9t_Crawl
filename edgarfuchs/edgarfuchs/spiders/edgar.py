@@ -31,7 +31,7 @@ class EdgarSpider(scrapy.Spider):
                 #     selection_str += item.css('a span:nth-of-type(1)::text').get() + ", "
 
                 filter_list.append(
-                    #filters.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
+                    # filters.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
                     filters.css('span:nth-of-type(2)::text').get() + '; ')
 
             # Get more data

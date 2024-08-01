@@ -22,13 +22,14 @@ class GuentherSpider(scrapy.Spider):
             filter_list = []
             allfilter = all_filter.css('a.product-filter-down')
             for filters in allfilter:
-                items = all_filter.css('ul.sub-category')
-                selection_str = ''
-                for item in items:
-                    selection_str += item.css('span:nth-of-type(1)::text').get().strip() + ", "
+                # items = (all_filter.css('ul.sub-category li'))
+                # selection_str = ''
+                # for item in items:
+                #     selection_str += item.css('a span:nth-of-type(1)::text').get() + ", "
 
                 filter_list.append(
-                    filters.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
+                    # filters.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
+                    filters.css('span:nth-of-type(2)::text').get() + '; ')
 
             # Get more data
             data_list = []
@@ -54,4 +55,3 @@ class GuentherSpider(scrapy.Spider):
                 if relative_url:
                     # Follow the link to the next category page and call the same parse method
                     yield response.follow(relative_url, callback=self.parse)
-
