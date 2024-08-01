@@ -47,7 +47,9 @@ class GuentherSpider(scrapy.Spider):
         else:
             print(response.url)
             # Get all Links of categories from the current page
-            categories = response.css('ul.level0.clearfix')
+            allcategories = response.css('div.white-databox')
+
+            categories = allcategories.css('div.service-box')
             for category in categories:
                 # Extract Urls
                 relative_url = category.css('p.service-links a::attr(href)').get()

@@ -11,7 +11,7 @@ class HinscheSpider(scrapy.Spider):
         all_filter = response.css('div.product-filter-accordian:first-of-type')
         # Check if filter is there (Yes: Get all data ; No: Get more Links and go to parse)
         if all_filter:
-            self.logger.info('Beginne das Scrapen der Seite: %s', response.url)
+            # self.logger.info('Beginne das Scrapen der Seite: %s', response.url)
             # Get the Title of Categoies
             category_list = []
             all_categories = response.css('div.breadcrumbs li:not(:first-child)')
@@ -47,7 +47,8 @@ class HinscheSpider(scrapy.Spider):
         else:
             print(response.url)
             # Get all Links of categories from the current page
-            categories = response.css('ul.level0.clearfix')
+            allcategories = response.css('div.white-databox')
+            categories = allcategories.css('div.service-box')
             for category in categories:
                 # Extract Urls
                 relative_url = category.css('p.service-links a::attr(href)').get()
