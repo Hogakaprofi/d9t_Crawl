@@ -14,7 +14,7 @@ class EdgarSpider(scrapy.Spider):
         all_filter = response.css('div.product-filter-accordian:first-of-type')
         # Check if filter is there (Yes: Get all data ; No: Get more Links and go to parse)
         if all_filter:
-            self.logger.info('Beginne das Scrapen der Seite: %s', response.url)
+            #self.logger.info('Beginne das Scrapen der Seite: %s', response.url)
             # Get the Title of Categoies
             category_list = []
             all_categories = response.css('div.breadcrumbs li:not(:first-child)')
@@ -25,7 +25,7 @@ class EdgarSpider(scrapy.Spider):
             filter_list = []
             allfilter = all_filter.css('a.product-filter-down')
             for filters in allfilter:
-                # items = (all_filter.css('ul.sub-category'))
+                # items = (all_filter.css('ul.sub-category li'))
                 # selection_str = ''
                 # for item in items:
                 #     selection_str += item.css('a span:nth-of-type(1)::text').get() + ", "
