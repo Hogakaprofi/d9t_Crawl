@@ -24,18 +24,19 @@ class EdgarSpider(scrapy.Spider):
             # Get Filter
             filter_list = []
             allfilter = all_filter.css('a.product-filter-down')
-            for filters in allfilter:
-                items = (all_filter.css('ul.sub-category li'))
-                selection_str = ''
-                for item in items:
-                    sub_filter = item.css('a span:nth-of-type(1)::text').get()
-                    if sub_filter:
-                        selection_str += sub_filter + ", "
+            ultags = all_filter.css('ul.sub-category')
+            # print(len(allfilter))
+            # print(len(ultags))
+            if len(allfilter) == len(ultags):
+                for filters, sub_filter in zip(allfilter, ultags):
+                    a_text = filters.css('span:nth-of-type(2)::text').get() + ': '
+                    li_texts = sub_filter.css('li a span:nth-of-type(1)::text').getall()
 
-                filter_list.append(
-                    # filters.css('span:nth-of-type(2)::text').get() + '; ')
-                    filters.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
+                    result = a_text + ", ".join(li_texts)
 
+                    filter_list.append(result)
+            else:
+                self.log("Geht nicht!")
 
             # Get more data
             data_list = []
@@ -43,10 +44,10 @@ class EdgarSpider(scrapy.Spider):
             for data in more_data:
                 data_list.append(data.css('p.service-links a::attr(title)').get())
             # Output in json file
-            yield{
+            yield {
                 'Url': response.url,
                 'Title': category_list,
-                'Filter': filter_list,
+                'Filter': filter_list, # 'Filter': "; ".join(filter_list),
                 'Data': data_list
             }
         #

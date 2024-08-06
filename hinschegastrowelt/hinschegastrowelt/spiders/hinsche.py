@@ -21,18 +21,19 @@ class HinscheSpider(scrapy.Spider):
             # Get Filter
             filter_list = []
             allfilter = all_filter.css('a.product-filter-down')
-            for filters in allfilter:
-                items = (all_filter.css('ul.sub-category li'))
-                selection_str = ''
-                for item in items:
-                    sub_filter = item.css('a span:nth-of-type(1)::text').get()
-                    if sub_filter:
-                        selection_str += sub_filter + ", "
+            ultags = all_filter.css('ul.sub-category')
+            # print(len(allfilter))
+            # print(len(ultags))
 
-                filter_list.append(
-                    # filters.css('span:nth-of-type(2)::text').get() + '; ')
-                    filters.css('span:nth-of-type(2)::text').get() + ': ' + selection_str)
+            if len(allfilter) == len(ultags):
+                for filters, sub_filter in zip(allfilter, ultags):
+                    a_text = filters.css('span:nth-of-type(2)::text').get() + ': '
+                    li_texts = sub_filter.css('li a span:nth-of-type(1)::text').getall()
 
+                    result = a_text + ", ".join(li_texts)
+                    filter_list.append(result)
+            else:
+                self.log("Geht nicht!")
 
             # Get more data
             data_list = []
