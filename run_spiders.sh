@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Arrays initialisieren
+# Arrays initialisieren test
 paths=("/home/user/crawl/d9t_Crawl/grimmgastro" "/home/user/crawl/d9t_Crawl/schafferer/" "/home/user/crawl/d9t_Crawl/toptable" "/home/user/crawl/d9t_Crawl/edgarfuchs" "/home/user/crawl/d9t_Crawl/hinschegastrowelt" "/home/user/crawl/d9t_Crawl/dueGuenther") # Pfade, die durchgegangen werden sollen
 spiders=("grimm" "schaff" "ttable" "edgar" "hinsche" "guenther") # Namen der Spider-Befehle
 pathjson=("/home/user/crawl/d9t_Crawl/grimmgastro/grimmgastro.json" "/home/user/crawl/d9t_Crawl/schafferer/schafferer.json" "/home/user/crawl/d9t_Crawl/toptable/toptable.json" "/home/user/crawl/d9t_Crawl/edgarfuchs/edgarfuchs.json" "/home/user/crawl/d9t_Crawl/hinschegastrowelt/hinschegastro.json" "/home/user/crawl/d9t_Crawl/dueGuenther/guenther.json")
