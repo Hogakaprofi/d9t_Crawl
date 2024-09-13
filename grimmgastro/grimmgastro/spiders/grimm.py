@@ -15,7 +15,6 @@ class GrimmSpider(scrapy.Spider):
                    'https://www.grimm-gastrobedarf.de/sale.html'}
 
     # Scrape the Main-Page (Startseite)
-
     def parse(self, response):
         # Get all main categorys of main-page (https://www.grimm-gastrobedarf.de/)
         all_categories = response.css('a.s360-megamenu__link.s360-megamenu__link--category')
@@ -28,7 +27,6 @@ class GrimmSpider(scrapy.Spider):
 
     # Scrape the individual categories (2. Ebene)
     def parse_second_category_page(self, response):
-
         # Get all the individual links of the individual main page categoies
         second_categories = response.css('a.category-name')
 
@@ -37,16 +35,12 @@ class GrimmSpider(scrapy.Spider):
             sec_relative_url = second_category.css('a ::attr(href)').get()
             yield response.follow(sec_relative_url, callback=self.parse_third_category_page)
 
-    # Scrape the individual categories of the second website (3. Ebene)
+   # Scrape the individual categories of the second website (3. Ebene)
     def parse_third_category_page(self, response):
-
         # Check if filters are present
-        filtersThere = response.css('h1.cms-element-sidebar__additional-info--category').get()
-        textThere = response.css('div.cms-element-text').get()
+        categoryThere = response.css('div.card.product-box.category-body').get()
 
-        if filtersThere or textThere:
-            yield response.follow(response.url, callback=self.parse_fourth_category_page)
-        else:
+        if categoryThere:
             # Get all the individual links of the individual main page categoies
             second_categories = response.css('a.category-name')
 
@@ -54,10 +48,11 @@ class GrimmSpider(scrapy.Spider):
                 # Main Page Urls (Links)
                 third_relative_url = second_category.css('a ::attr(href)').get()
                 yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
+        else:
+            yield response.follow(response.url, callback=self.parse_fourth_category_page)
 
     # Scrape the individual Links for the products (4. Ebene)
     def parse_fourth_category_page(self, response):
-
         # Get all filter divs
         all_filter = response.css('div.filter-panel-item')
         Title_list = []
