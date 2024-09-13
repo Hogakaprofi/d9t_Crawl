@@ -55,15 +55,19 @@ class GrimmSpider(scrapy.Spider):
     def parse_fourth_category_page(self, response):
         # Get all filter divs
         all_filter = response.css('div.filter-panel-item')
-        Title_list = []
+        Filter_list = []
 
         for filtered in all_filter:
-            Title_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip())
+            test = filtered.css('li.filter-multi-select-list-item label::text').getall()
+            if test:   
+                Filter_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip() + ": " + "; ".join(test))
+            else:
+                Filter_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip() + ": ---")
 
         yield {
             'First_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[1]/a/span/text()").get(),
             'Second_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
             'Third_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[3]/a/span/text()").get(),
-            'Filter_namen': Title_list,
+            'Filter_namen': Filter_list,
             'Third_Url': response.url,
         }
