@@ -39,13 +39,21 @@ class GrimmSpider(scrapy.Spider):
 
     # Scrape the individual categories of the second website (3. Ebene)
     def parse_third_category_page(self, response):
-        # Get all the individual links of the individual main page categoies
-        second_categories = response.css('a.category-name')
 
-        for second_category in second_categories:
-            # Main Page Urls (Links)
-            third_relative_url = second_category.css('a ::attr(href)').get()
-            yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
+        # Check if filters are present
+        filtersThere = response.css('h1.cms-element-sidebar__additional-info--category').get()
+        textThere = response.css('div.cms-element-text').get()
+
+        if filtersThere or textThere:
+            yield response.follow(response.url, callback=self.parse_fourth_category_page)
+        else:
+            # Get all the individual links of the individual main page categoies
+            second_categories = response.css('a.category-name')
+
+            for second_category in second_categories:
+                # Main Page Urls (Links)
+                third_relative_url = second_category.css('a ::attr(href)').get()
+                yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
 
     # Scrape the individual Links for the products (4. Ebene)
     def parse_fourth_category_page(self, response):
