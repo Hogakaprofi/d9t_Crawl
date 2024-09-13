@@ -58,9 +58,9 @@ class GrimmSpider(scrapy.Spider):
         Filter_list = []
 
         for filtered in all_filter:
-            test = filtered.css('li.filter-multi-select-list-item label::text').getall()
-            if test:   
-                Filter_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip() + ": " + "; ".join(test))
+            selection_filter = [item.strip() for item in filtered.css('li.filter-multi-select-list-item label::text').getall()]
+            if selection_filter:   
+                Filter_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip() + ": " + "; ".join(selection_filter))
             else:
                 Filter_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip() + ": ---")
 
