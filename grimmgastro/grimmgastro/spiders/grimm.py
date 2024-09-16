@@ -1,3 +1,4 @@
+
 import scrapy
 from scrapy.http import Response
 import random
@@ -38,9 +39,10 @@ class GrimmSpider(scrapy.Spider):
    # Scrape the individual categories of the second website (3. Ebene)
     def parse_third_category_page(self, response):
         # Check if filters are present
+        print("Before check" + response.url)
         categoryThere = response.css('div.card.product-box.category-body').get()
 
-        if categoryThere:
+        if categoryThere is not None:
             # Get all the individual links of the individual main page categoies
             second_categories = response.css('a.category-name')
 
@@ -49,6 +51,7 @@ class GrimmSpider(scrapy.Spider):
                 third_relative_url = second_category.css('a ::attr(href)').get()
                 yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
         else:
+            print("After Check" + response.url )
             yield response.follow(response.url, callback=self.parse_fourth_category_page)
 
     # Scrape the individual Links for the products (4. Ebene)
@@ -69,5 +72,5 @@ class GrimmSpider(scrapy.Spider):
             'Second_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
             'Third_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[3]/a/span/text()").get() or "---",
             'Filter_namen': Filter_list,
-            'Third_Url': response.url,
+            'Third_Url': response.url
         }
