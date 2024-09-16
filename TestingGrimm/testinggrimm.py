@@ -5,7 +5,7 @@ from typing import Any
 
 
 class GrimmSpider(scrapy.Spider):
-    name = "grimm"
+    name = "testgrimm"
     allowed_domains = ["www.grimm-gastrobedarf.de"]
     start_urls = ["https://www.grimm-gastrobedarf.de/"]
 
