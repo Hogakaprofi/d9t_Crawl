@@ -1,4 +1,7 @@
 import scrapy
+from scrapy.http import Response
+import random
+from typing import Any
 
 
 class HogakaSpider(scrapy.Spider):
