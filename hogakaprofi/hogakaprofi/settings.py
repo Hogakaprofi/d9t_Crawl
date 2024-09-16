@@ -13,7 +13,7 @@ SPIDER_MODULES = ["hogakaprofi.spiders"]
 NEWSPIDER_MODULE = "hogakaprofi.spiders"
 
 FEEDS = {
-    'grimmgastro.json': {'format': 'json'},
+    'hogaka.json': {'format': 'json'},
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
