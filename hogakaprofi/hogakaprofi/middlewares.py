@@ -101,3 +101,21 @@ class HogakaprofiDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info("Spider opened: %s" % spider.name)
+
+
+class RotateUserAgentMiddleware(UserAgentMiddleware):
+    def __init__(self, user_agent_list):
+        super().__init__()
+        self.user_agent_list = user_agent_list
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        # Lese die User-Agent-Liste aus den Scrapy-Einstellungen
+        user_agent_list = crawler.settings.get('USER_AGENT_LIST', [])
+        return cls(user_agent_list)
+
+    def process_request(self, request, spider):
+        # Rotiere den User-Agent für jede Anfrage
+        user_agent = random.choice(self.user_agent_list)
+        if user_agent:
+            request.headers.setdefault(b'User-Agent', user_agent)
