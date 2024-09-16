@@ -43,6 +43,7 @@ class GrimmSpider(scrapy.Spider):
         categoryThere = response.css('div.card.product-box.category-body').get()
 
         if categoryThere is not None:
+            print("Is not None\n")
             # Get all the individual links of the individual main page categoies
             second_categories = response.css('a.category-name')
 
@@ -51,7 +52,7 @@ class GrimmSpider(scrapy.Spider):
                 third_relative_url = second_category.css('a ::attr(href)').get()
                 yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
         else:
-            print("After Check" + response.url )
+            print("Is None\n")
             yield response.follow(response.url, callback=self.parse_fourth_category_page)
 
     # Scrape the individual Links for the products (4. Ebene)
