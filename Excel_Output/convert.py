@@ -8,7 +8,8 @@ file_paths = [
     '/home/user/crawl/d9t_Crawl/toptable/toptable.json',
     '/home/user/crawl/d9t_Crawl/edgarfuchs/edgarfuchs.json',
     '/home/user/crawl/d9t_Crawl/hinschegastrowelt/hinschegastro.json',
-    '/home/user/crawl/d9t_Crawl/dueGuenther/guenther.json'
+    '/home/user/crawl/d9t_Crawl/dueGuenther/guenther.json',
+    '/home/user/crawl/d9t_Crawl/hogakaprofi/hogaka.json'
 ]
 
 output = '/home/user/crawl/d9t_Crawl/Excel_Output/'
