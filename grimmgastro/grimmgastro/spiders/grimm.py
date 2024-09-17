@@ -45,7 +45,7 @@ class GrimmSpider(scrapy.Spider):
 
         if categoryThere is not None:
             print("Is not None\n")
-            print("")
+            print("H")
             time="Not None!"
             # Get all the individual links of the individual main page categoies
             second_categories = response.css('a.category-name')
