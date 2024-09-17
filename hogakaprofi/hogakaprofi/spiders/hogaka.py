@@ -45,10 +45,12 @@ class HogakaSpider(scrapy.Spider):
                 # Main Page Urls (Links)
                 third_relative_url = second_category.css('a ::attr(href)').get()
                 yield {
-                    'Not None': third_relative_url,
+                    'url': third_relative_url,
+                    'nNone or None': "Not None",
                 }
         else:
             yield {
-                'None': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
-                'URL': response.url,
+                'url': response.url,
+                'nNone or None': "None",
+                'Test': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
             }
