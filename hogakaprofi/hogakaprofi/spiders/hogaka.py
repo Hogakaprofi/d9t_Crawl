@@ -33,7 +33,21 @@ class HogakaSpider(scrapy.Spider):
         for second_category in second_categories:
             # Main Page Urls (Links)
             sec_relative_url = second_category.css('a ::attr(href)').get()
+            yield response.follow(sec_relative_url, callback=self.parse_third_category_page)
+
+    def parse_third_category_page(self, response):
+        # Check if filters are present
+        categoryThere = response.css('div.card.product-box.category-body').get()
+        if categoryThere:
+            # Get all the individual links of the individual main page categoies
+            second_categories = response.css('a.category-name')
+            for second_category in second_categories:
+                # Main Page Urls (Links)
+                third_relative_url = second_category.css('a ::attr(href)').get()
+                yield {
+                    'Not None': third_relative_url,
+                }
+        else:
             yield {
-                'First lvl': response.url,
-                'second lvl': sec_relative_url
+                'None': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
             }
