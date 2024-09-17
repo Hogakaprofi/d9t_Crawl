@@ -55,7 +55,7 @@ class GrimmSpider(scrapy.Spider):
                 yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
         else:
             print("Is None\n")
-            time="None"
+            time="None!"
             yield response.follow(response.url, callback=self.parse_fourth_category_page)
 
     # Scrape the individual Links for the products (4. Ebene)
