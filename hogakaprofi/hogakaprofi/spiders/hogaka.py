@@ -50,4 +50,5 @@ class HogakaSpider(scrapy.Spider):
         else:
             yield {
                 'None': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
+                'URL': response.url,
             }
