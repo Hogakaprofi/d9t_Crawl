@@ -45,6 +45,7 @@ class GrimmSpider(scrapy.Spider):
 
         if categoryThere is not None:
             print("Is not None\n")
+            print("")
             time="Not None!"
             # Get all the individual links of the individual main page categoies
             second_categories = response.css('a.category-name')
@@ -55,6 +56,7 @@ class GrimmSpider(scrapy.Spider):
                 yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
         else:
             print("Is None\n")
+            print("")
             time="None!"
             yield response.follow(response.url, callback=self.parse_fourth_category_page)
 
