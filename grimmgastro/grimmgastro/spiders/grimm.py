@@ -39,28 +39,21 @@ class GrimmSpider(scrapy.Spider):
    # Scrape the individual categories of the second website (3. Ebene)
     def parse_third_category_page(self, response):
         # Check if filters are present
-        print("Before check" + response.url)
         categoryThere = response.css('div.card.product-box.category-body').get()
-        time="Hi"
         if categoryThere is not None:
-            print("Is not None\n")
-            time="Not None"
             # Get all the individual links of the individual main page categoies
             second_categories = response.css('a.category-name')
-
             for second_category in second_categories:
                 # Main Page Urls (Links)
                 third_relative_url = second_category.css('a ::attr(href)').get()
-                yield response.follow(third_relative_url, callback=self.parse_fourth_category_page, meta={'Test': time})
+                yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
         else:
-            print("Is None\n")
-            time="None!"
+            print(response.url)
             yield response.follow(response.url, callback=self.parse_fourth_category_page)
 
     # Scrape the individual Links for the products (4. Ebene)
     def parse_fourth_category_page(self, response):
         # Get all filter divs
-        print(response.meta.get('Test'))
         all_filter = response.css('div.filter-panel-item')
         Filter_list = []
         for filtered in all_filter:
