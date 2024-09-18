@@ -15,7 +15,7 @@ class GrimmSpider(scrapy.Spider):
     ignore_urls = {'https://www.grimm-gastrobedarf.de/unsere-marken.html',
                    'https://www.grimm-gastrobedarf.de/sale.html'}
 
-    # Scrape the Main-Page (Startseite)
+   # Scrape the Main-Page (Startseite)
     def parse(self, response):
         # Get all main categorys of main-page (https://www.grimm-gastrobedarf.de/)
         all_categories = response.css('a.s360-megamenu__link.s360-megamenu__link--category')
@@ -36,11 +36,11 @@ class GrimmSpider(scrapy.Spider):
             sec_relative_url = second_category.css('a ::attr(href)').get()
             yield response.follow(sec_relative_url, callback=self.parse_third_category_page)
 
-   # Scrape the individual categories of the second website (3. Ebene)
+    # Scrape the individual categories of the second website (3. Ebene)
     def parse_third_category_page(self, response):
         # Check if filters are present
         categoryThere = response.css('div.card.product-box.category-body').get()
-        if categoryThere is not None:
+        if categoryThere:
             # Get all the individual links of the individual main page categoies
             second_categories = response.css('a.category-name')
             for second_category in second_categories:
@@ -48,8 +48,11 @@ class GrimmSpider(scrapy.Spider):
                 third_relative_url = second_category.css('a ::attr(href)').get()
                 yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
         else:
-            print(response.url)
-            yield response.follow(response.url, callback=self.parse_fourth_category_page)
+            yield {
+                'First_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[1]/a/span/text()").get(),
+                'Second_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
+                'Third_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[3]/a/span/text()").get() or "---",
+            }
 
     # Scrape the individual Links for the products (4. Ebene)
     def parse_fourth_category_page(self, response):
