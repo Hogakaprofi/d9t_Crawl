@@ -48,10 +48,21 @@ class GrimmSpider(scrapy.Spider):
                 third_relative_url = second_category.css('a ::attr(href)').get()
                 yield response.follow(third_relative_url, callback=self.parse_fourth_category_page)
         else:
+             # Get all filter divs
+            all_filter = response.css('div.filter-panel-item')
+            Filter_list = []
+            for filtered in all_filter:
+                selection_filter = [item.strip() for item in filtered.css('li.filter-multi-select-list-item label::text').getall()]
+                if selection_filter:   
+                    Filter_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip() + ": " + "; ".join(selection_filter))
+                else:
+                    Filter_list.append(filtered.css('button.filter-panel-item-toggle::text').get().strip() + ": ---")
             yield {
                 'First_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[1]/a/span/text()").get(),
                 'Second_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[2]/a/span/text()").get(),
                 'Third_Title': response.xpath("/html/body/main/div[2]/div/nav/ol/li[3]/a/span/text()").get() or "---",
+                'Filter_namen': Filter_list,
+                'Third_Url': response.url
             }
 
     # Scrape the individual Links for the products (4. Ebene)
